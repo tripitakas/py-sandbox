@@ -22,9 +22,8 @@ Python + Tornado 的过关练习项目。
 
 1. [用GIT提交代码](step1)
 1. [用Markdown编写文档](step2)
-1. 搭建Python开发环境
-1. 编写简单的Python文件，学会调试和测试
-1. 学会Python的基本语法
+1. [搭建Python开发环境](step3)
+1. 学会Python的基本语法，学会调试
 1. 学会Tornado的简单功能
 1. 使用Tornado模板语法编写前端页面
 1. 学会Tornado的路由/API开发
