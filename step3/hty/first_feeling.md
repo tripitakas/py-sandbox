@@ -1,0 +1,5 @@
+# 我的感受
+对git还是不是很熟悉，需要多试几次
+我的github fork了tripitakas的py-sandbox，但是tripitakas更新之后，我却不知道怎么同步
+
+pycharm的project目录是默认目录，而不是我为github本地文件建的目录，导致每次都要将文件另存为
