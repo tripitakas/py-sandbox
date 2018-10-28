@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Index</title>
+</head>
+<body>
+    <h1>I would like to...</h1>
+    <form method="post" action="/listall">
+    <p>List file names in current directory and subdirectories <input type="submit" value="Confirm"></p>
+    </form>
+    <form method="post" action="/save">
+    <p>Save some data <input type="submit" value="Confirm"></p>
+    </form>
+
+    {% block listdir %}{% end %}
+    {% block content %}{% end %}
+</body>
+</html>

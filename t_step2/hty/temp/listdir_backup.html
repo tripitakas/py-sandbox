@@ -1,0 +1,15 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>List directory</title>
+</head>
+<body>
+    <h1>The directory {{dir}} contains...</h1>
+    <ul>
+        {% for filename in dirlist %}
+            <li>{{filename}}</li>
+        {% end %}
+    </ul>
+</body>
+</html>
