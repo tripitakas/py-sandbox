@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+{% block listdir %}
+    <h1>The directory {{dir}} contains...</h1>
+    <ul>
+        {% for filename in dirlist %}
+            <form method="post" action="/openfile?fn={{filename}}">
+            <p>{{filename}} <input type="submit" value="Open"></p>
+            </form>
+        {% end %}
+    </ul>
+{% end %}
+
