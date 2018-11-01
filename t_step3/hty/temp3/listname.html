@@ -1,0 +1,10 @@
+{% extends "index.html" %}
+{% block listname %}
+    <h1>They also visit here:</h1>
+    <ul>
+        {% for name in namelist %}
+            <p>{{name}} </p>
+        {% end %}
+    </ul>
+{% end %}
+
