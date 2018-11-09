@@ -1,0 +1,30 @@
+# -*- coding: utf-8 -*-  unicode 8 编码
+
+from tornado.ioloop import IOLoop 
+from tornado.web import Application, RequestHandler
+from os import path, listdir
+from file_util import load_json
+#导入相应库中的函数
+
+class MainHandler(RequestHandler):# RequestHandler类的子类
+    def get(self):#响应get请求
+        names = sorted([f[:-4] for f in listdir('cut-result') if f.endswith('.txt')])#返回cut-result目录下的txt文件列表，每个文件只有倒数第四个字符之前的字符（不需要.txt）
+        exists = [load_json(path.join('char-pos', *s.split('_')[:-1], s + '.json')) for s in names]#对char-pos目录下的json文件进行解码
+        items = ['<li><a href="/{0}">{0}</a>{1}</li>'.format(n, '' if e else ' ?') for n, e in zip(names, exists)]# items 是char-pos路径下要解析的文件列表，以html格式存储
+        items = [s for s in items if '?' not in s] + [s for s in items if '?' in s]#把没有jasn解码的文件列在html文件列表的后边，有解码的文件列在文件列表的前边
+        self.write('<ol>%s</ol>' % ''.join(items))# html格式文件以空格连接返回给前端
+
+
+class CutHandler(RequestHandler):# RequestHandler的类的子类 
+    def get(self, name):
+        cut = load_json(path.join('char-pos', *name.split('_')[:-1], name + '.json'))#匹配前端传来的文件名对，根目录下的json文件解码
+        if not cut:
+            return self.write(name + ' not exist') # 文件不存在返回前端说文件不存在
+        self.render('visualize.html', cut=cut)#渲染visualize.html文件，显示在前端
+
+
+if __name__ == '__main__':
+    app = Application([(r'/', MainHandler), (r'/(\w+)', CutHandler)], debug=True)# Application类的实例，指定响应http请求的类。debug =true在修改代码，就会自动重启，不需要手动了，出现错误直接在html显示
+    app.listen(8002)# 创建http服务器实例，绑定8002端口
+    print('Start http://localhost:8002')#打印
+    IOLoop.current().start()#启动当前线程的IOLoop实例的I/O循环，同时服务器监听打开,不断调用accept来响应客户端链接。IOLoop实例对象调用start
